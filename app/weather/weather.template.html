@@ -13,7 +13,7 @@
   <button class="weather-form__button">Go</button>
 </form>
 
-<section class="results">
+<section ng-if="weatherData" class="results">
   <h1>Results</h1>
   <div>Current Weather: {{weatherData.currentWeather}}</div>
   <div>Last Reading: {{weatherData.lastReading}}</div>
