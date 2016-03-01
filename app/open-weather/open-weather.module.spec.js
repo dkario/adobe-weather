@@ -13,30 +13,41 @@ describe('Open Weather service', function () {
   describe('getWeather()', function () {
 
     beforeEach(function () {
-      $httpBackend.expectGET('http://api.openweathermap.org/data/2.5/weather?q=newyork&appid=d28f5a35ca3977b95c5ab244addbda38')
-      .respond({
+      this.weatherData = {
         main: {
           temp: 285,
           humidity: 50
         },
         sys: {
           sunrise: 1456831682,
-          sunset: 1456831682,
+          sunset: 1456854504,
         },
         weather: [{
           main: 'Clouds'
         }]
-      });
+      };
+
+      this.getQueryUrl = function (locationString) {
+        var urlBase = 'http://api.openweathermap.org/data/2.5/weather?q=';
+        var apiKey = 'd28f5a35ca3977b95c5ab244addbda38';
+        var urlSuffix = '&appid=' + apiKey;
+
+        return urlBase + locationString + urlSuffix;
+      };
     });
 
     it('should retrieve the weather when passed in a city', function () {
-      openWeather.getWeather('newyork')
+
+      $httpBackend.expectGET(this.getQueryUrl('newyork,usa'))
+        .respond(this.weatherData);
+
+      openWeather.getWeather('New York', 'USA')
         .then(function (data) {
           expect(data.currentWeather).toBe('Clouds');
-          expect(data.temperature).toEqual(285);
-          expect(data.humidity).toEqual(50);
-          expect(data.sunrise).toEqual(1456831682);
-          expect(data.sunset).toEqual(1456831682);
+          expect(data.temperature).toEqual('54 F');
+          expect(data.humidity).toEqual('50%');
+          expect(data.sunrise).toEqual('6:28:02 AM');
+          expect(data.sunset).toEqual('12:48:24 PM');
         });
 
       $httpBackend.flush();
