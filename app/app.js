@@ -11,6 +11,7 @@ require('./templates/templates');
 
 // Angular modules
 require('./main/main.module');
+require('./home/home.module');
 require('./404/404.module');
 
 var adobeWeather = angular.module('adobeWeather', [
@@ -19,6 +20,7 @@ var adobeWeather = angular.module('adobeWeather', [
 
   // Angular modules
   'main',
+  'home',
   '404'
 ])
 .config(routes);
