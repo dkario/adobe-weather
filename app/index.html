@@ -11,9 +11,25 @@
   <title>Adobe Weather</title>
 </head>
 <body>
-  <header></header>
-  <div ui-view></div>
-  <footer></footer>
+  <section class="site-container">
+    <nav class="breadcrumbs">
+      <span class="breadcrumbs__item">Adobe Marketing Cloud</span>
+      <span class="breadcrumbs__item">Weather</span>
+    </nav>
+    <section class="site-body">
+      <nav class="sidebar">
+        <div class="sidebar__item--header">Menu</div>
+        <div class="sidebar__item">Home</div>
+        <div class="sidebar__item">Weather</div>
+      </nav>
+      <section class="content">
+        <header class="content-header">Weather</header>
+        <section class="content-body">
+          <div ui-view></div>
+        </section>
+        <footer class="content-footer">&copy; 2016 Adobe Systems Incorporated. All Rights Reserved.</footer>
+      </section>
+    </section>
   <script src="assets/adobe-weather.js"></script>
 </body>
 </html>
