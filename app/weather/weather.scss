@@ -1,0 +1,21 @@
+.weather-form {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+
+  &__label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  &__input {
+    width: 15rem;
+  }
+
+  &__button {
+    display: block;
+    width: 3rem;
+    align-self: flex-end;
+  }
+}
