@@ -14,7 +14,7 @@
   <section class="site-container">
     <nav class="breadcrumbs">
       <span class="breadcrumbs__item">Adobe Marketing Cloud</span>
-      <span class="breadcrumbs__item">Weather</span>
+      <span class="breadcrumbs__item" ui-view="title"></span>
     </nav>
     <section class="site-body">
       <nav class="sidebar">
@@ -23,9 +23,9 @@
         <a ui-sref="weather" class="sidebar__item"><div>Weather</div></a>
       </nav>
       <section class="content">
-        <header class="content-header">Weather</header>
+        <header class="content-header" ui-view="title"></header>
         <section class="content-body">
-          <div ui-view></div>
+          <div ui-view="content-body"></div>
         </section>
         <footer class="content-footer">&copy; 2016 Adobe Systems Incorporated. All Rights Reserved.</footer>
       </section>
