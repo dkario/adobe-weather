@@ -1,14 +1,24 @@
 <h1>Enter City/State</h1>
-<form class="weather-form">
+<form ng-submit="submit()" class="weather-form">
   <label class="weather-form__label">
     <span>City:</span>
-    <input class="weather-form__input" />
+    <input ng-model="city" class="weather-form__input" />
   </label>
 
   <label class="weather-form__label">
     <span>Country:</span>
-    <input class="weather-form__input" />
+    <input ng-model="country" class="weather-form__input" />
   </label>
 
   <button class="weather-form__button">Go</button>
 </form>
+
+<section class="results">
+  <h1>Results</h1>
+  <div>Current Weather: {{weatherData.currentWeather}}</div>
+  <div>Last Reading: {{weatherData.lastReading}}</div>
+  <div>Temperature: {{weatherData.temperature}}</div>
+  <div>Humidity: {{weatherData.humidity}}</div>
+  <div>Sunrise: {{weatherData.sunrise}}</div>
+  <div>Sunset: {{weatherData.sunset}}</div>
+</section>
