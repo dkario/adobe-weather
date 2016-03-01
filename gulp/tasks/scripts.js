@@ -6,17 +6,14 @@ var browserSync = require('browser-sync');
 var buffer = require('vinyl-buffer');
 var assignIn = require('lodash.assignin');
 var gulpIf = require('gulp-if');
-var stylish = require('jshint-stylish');
 var uglify = require('gulp-uglify');
 var config = require('../config').scripts;
-var bundleConfigs = config.bundleConfigs;
-var jshintTask = require('./jshint');
-var templatesTask = require('./templates');
 var merge = require('merge-stream');
+var bundleConfigs = config.bundleConfigs;
+var templatesTask = require('./templates');
 
 module.exports = function scripts(cb, devMode) {
 
-  jshintTask();
   templatesTask();
 
   if (devMode) {

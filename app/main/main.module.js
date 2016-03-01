@@ -5,7 +5,9 @@ angular.module('main', [])
     $stateProvider
     .state('main', {
       url: '/',
-      templateUrl: 'main.template.html'
+      templateUrl: 'main.template.html',
+      controller: 'MainController'
     });
   },
-]);
+])
+.controller('MainController', require('./main.controller.js'));

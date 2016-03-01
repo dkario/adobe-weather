@@ -38,4 +38,7 @@ module.exports = {
     src: sourceFiles + '/index.html',
     dest: publicAssets,
   },
+  test: {
+    configFile: process.cwd() + '/karma.conf.js'
+  },
 };

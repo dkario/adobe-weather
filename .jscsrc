@@ -1,3 +1,4 @@
 {
+	"disallowQuotedKeysInObjects": false,
 	"requireTrailingComma": false
 }
