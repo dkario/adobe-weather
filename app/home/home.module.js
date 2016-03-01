@@ -5,7 +5,7 @@ angular.module('home', [])
     $stateProvider
     .state('home', {
       url: '/home',
-      templateUrl: 'home.template.html',
+      templateUrl: 'home.template.html'
     });
   },
 ]);
