@@ -13,30 +13,73 @@ describe('Open Weather service', function () {
   describe('getWeather()', function () {
 
     beforeEach(function () {
-      $httpBackend.expectGET('http://api.openweathermap.org/data/2.5/weather?q=newyork&appid=d28f5a35ca3977b95c5ab244addbda38')
-      .respond({
+      this.weatherData = {
+        cod: 200,
         main: {
           temp: 285,
           humidity: 50
         },
         sys: {
           sunrise: 1456831682,
-          sunset: 1456831682,
+          sunset: 1456854504,
         },
         weather: [{
           main: 'Clouds'
         }]
-      });
+      };
+
+      this.getQueryUrl = function (locationString) {
+        var urlBase = 'http://api.openweathermap.org/data/2.5/weather?q=';
+        var apiKey = 'd28f5a35ca3977b95c5ab244addbda38';
+        var urlSuffix = '&appid=' + apiKey;
+
+        return urlBase + locationString + urlSuffix;
+      };
     });
 
-    it('should retrieve the weather when passed in a city', function () {
-      openWeather.getWeather('newyork')
+    it('should retrieve the weather of a valid city and country', function () {
+
+      $httpBackend.expectGET(this.getQueryUrl('newyork,usa'))
+        .respond(this.weatherData);
+
+      openWeather.getWeather('New York', 'USA')
         .then(function (data) {
           expect(data.currentWeather).toBe('Clouds');
-          expect(data.temperature).toEqual(285);
-          expect(data.humidity).toEqual(50);
-          expect(data.sunrise).toEqual(1456831682);
-          expect(data.sunset).toEqual(1456831682);
+          expect(data.temperature).toEqual('54 F');
+          expect(data.humidity).toEqual('50%');
+          expect(data.sunrise).toEqual('6:28:02 AM');
+          expect(data.sunset).toEqual('12:48:24 PM');
+        });
+
+      $httpBackend.flush();
+    });
+
+    it('should return the error from Open Weather on invalid input', function () {
+
+      var errorData = {
+        cod: '404',
+        message: 'Error: Not found city'
+      };
+
+      $httpBackend.expectGET(this.getQueryUrl('koajfwe,jjk'))
+        .respond(errorData);
+
+      openWeather.getWeather('koajfwe', 'JJK')
+        .then(function (data) {
+          expect(data.errorMessage).toEqual('Error: Not found city');
+        });
+
+      $httpBackend.flush();
+    });
+
+    it('should return a custom error if the Open Weather API call errors', function () {
+
+      $httpBackend.expectGET(this.getQueryUrl('newyork,usa'))
+        .respond(500);
+
+      openWeather.getWeather('New York', 'USA')
+        .then(null, function (data, status) {
+          expect(data.errorMessage).toEqual('Sorry!');
         });
 
       $httpBackend.flush();

@@ -9,18 +9,31 @@ module.exports = [
 
         return $http.get(url)
           .then(function (res) {
-            return {
-              currentWeather: res.data.weather[0].main,
-              lastReading: formatDate(new Date()),
-              temperature: formatTemperature(res.data.main.temp),
-              humidity: formatHumidity(res.data.main.humidity),
-              sunrise: formatDate(res.data.sys.sunrise),
-              sunset: formatDate(res.data.sys.sunset)
-            };
-          }, function (res) {
-            console.log('service error');
-            console.log(res.status);
-            console.log(res.statusText);
+
+            if (res.data.cod.toString() === '200') {
+              return {
+                currentWeather: res.data.weather[0].main,
+                lastReading: formatDate(new Date()),
+                temperature: formatTemperature(res.data.main.temp),
+                humidity: formatHumidity(res.data.main.humidity),
+                sunrise: formatDate(res.data.sys.sunrise),
+                sunset: formatDate(res.data.sys.sunset),
+                success: true
+              };
+            } else if (res.data.cod.toString() === '404') {
+              return {
+                errorMessage: res.data.message,
+                success: false
+              };
+            }
+          }, function (res, status) {
+            if (status === 500) {
+              return {
+                errorMessage: 'We\'re sorry, something went wrong. ' +
+                              'Try plugging in the sun and try again.',
+                success: false
+              };
+            }
           });
       }
     };
