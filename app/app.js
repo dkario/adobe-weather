@@ -26,3 +26,5 @@ var adobeWeather = angular.module('adobeWeather', [
   '404'
 ])
 .config(routes);
+
+adobeWeather.factory('openWeather', require('./open-weather/open-weather.module'));

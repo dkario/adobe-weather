@@ -10,9 +10,11 @@ angular.module('weather', [])
           template: 'Weather'
         },
         'content-body': {
+          controller: 'WeatherController',
           templateUrl: 'weather.template.html',
         }
       },
     });
   },
-]);
+])
+.controller('WeatherController', require('./weather.controller.js'));
