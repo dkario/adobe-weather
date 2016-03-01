@@ -9,7 +9,7 @@ module.exports = [
         .then(function (data) {
           $scope.weatherData = data;
         }, function (data) {
-          console.log('error');
+          $scope.weatherData = data;
         });
     };
 
