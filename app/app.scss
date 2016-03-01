@@ -19,6 +19,10 @@ h1 {
   font-size: 2.0rem;
 }
 
+a {
+  text-decoration: none;
+}
+
 .site-container {
   display: flex;
   flex-direction: column;
@@ -60,7 +64,12 @@ h1 {
   }
 
   &__item {
+    display: block;
     background: $dark-gray;
+
+    &:hover {
+      background: lighten($dark-gray, 10%);
+    }
 
     &:not(:last-of-type) {
       border-bottom: 1px solid $medium-gray;
