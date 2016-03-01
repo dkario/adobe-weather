@@ -5,7 +5,14 @@ angular.module('weather', [])
     $stateProvider
     .state('weather', {
       url: '/weather',
-      templateUrl: 'weather.template.html'
+      views: {
+        'title': {
+          template: 'Weather'
+        },
+        'content-body': {
+          templateUrl: 'weather.template.html',
+        }
+      },
     });
   },
 ]);

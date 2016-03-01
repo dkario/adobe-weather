@@ -5,7 +5,14 @@ angular.module('home', [])
     $stateProvider
     .state('home', {
       url: '/home',
-      templateUrl: 'home.template.html'
+      views: {
+        'title': {
+          template: 'Home'
+        },
+        'content-body': {
+          templateUrl: 'home.template.html',
+        }
+      }
     });
   },
 ]);
