@@ -16,14 +16,16 @@
       <span class="breadcrumbs__item">Adobe Marketing Cloud</span>
       <span class="breadcrumbs__item" ui-view="title"></span>
     </nav>
-    <section class="site-body">
-      <nav class="sidebar">
+    <section class="site-body" ng-init="expanded = false">
+      <nav class="sidebar" ng-class="{ 'expanded': expanded }">
         <div class="sidebar__item--header">Menu</div>
         <a ui-sref="home" class="sidebar__item"><div>Home</div></a>
         <a ui-sref="weather" class="sidebar__item"><div>Weather</div></a>
       </nav>
       <section class="content">
-        <header class="content-header" ui-view="title"></header>
+        <header class="content-header" ng-click="expanded = !expanded">
+          <span ui-view="title"></span>
+        </header>
         <section class="content-body">
           <div ui-view="content-body"></div>
         </section>
