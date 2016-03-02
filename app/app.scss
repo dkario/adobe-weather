@@ -54,8 +54,14 @@ a {
 }
 
 .sidebar {
-  width: 25rem;
+  width: 0;
   background: $medium-gray;
+  overflow: hidden;
+  transition: width 100ms;
+
+  &.expanded {
+    width: 25rem;
+  }
 
   &__item,
   &__item--header {
@@ -88,6 +94,7 @@ a {
   color: $xlight-gray;
   background: $dark-gray;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .content-body {
