@@ -10,21 +10,18 @@ require('angular-ui-router');
 require('./templates/templates');
 
 // Angular modules
-require('./main/main.module');
 require('./home/home.module');
 require('./weather/weather.module');
-require('./404/404.module');
 
 var adobeWeather = angular.module('adobeWeather', [
   'ui.router',
   'templates',
 
   // Angular modules
-  'main',
   'home',
-  'weather',
-  '404'
+  'weather'
 ])
 .config(routes);
 
+// Services
 adobeWeather.factory('openWeather', require('./open-weather/open-weather.module'));
