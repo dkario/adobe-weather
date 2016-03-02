@@ -3,6 +3,6 @@ module.exports = [
   '$locationProvider',
   function ($urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
-    $urlRouterProvider.otherwise('/404');
+    $urlRouterProvider.otherwise('/home');
   }
 ];
