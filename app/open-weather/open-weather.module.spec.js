@@ -13,21 +13,6 @@ describe('Open Weather service', function () {
   describe('getWeather()', function () {
 
     beforeEach(function () {
-      this.weatherData = {
-        cod: 200,
-        main: {
-          temp: 285,
-          humidity: 50
-        },
-        sys: {
-          sunrise: 1456831682,
-          sunset: 1456854504,
-        },
-        weather: [{
-          main: 'Clouds'
-        }]
-      };
-
       this.getQueryUrl = function (locationString) {
         var urlBase = 'http://api.openweathermap.org/data/2.5/weather?q=';
         var apiKey = 'd28f5a35ca3977b95c5ab244addbda38';
@@ -39,16 +24,31 @@ describe('Open Weather service', function () {
 
     it('should retrieve the weather of a valid city and country', function () {
 
+      var weatherData = {
+        cod: 200,
+        main: {
+          temp: 285,
+          humidity: 50
+        },
+        sys: {
+          sunrise: 1456831682,
+          sunset: 1456854504,
+        },
+        weather: [{
+          description: 'light rain'
+        }]
+      };
+
       $httpBackend.expectGET(this.getQueryUrl('newyork,usa'))
-        .respond(this.weatherData);
+        .respond(weatherData);
 
       openWeather.getWeather('New York', 'USA')
         .then(function (data) {
-          expect(data.currentWeather).toBe('Clouds');
+          expect(data.currentWeather).toBe('light rain');
           expect(data.temperature).toEqual('54 F');
           expect(data.humidity).toEqual('50%');
-          expect(data.sunrise).toEqual('6:28:02 AM');
-          expect(data.sunset).toEqual('12:48:24 PM');
+          expect(data.sunrise).toEqual('03/01/2016 06:28:02');
+          expect(data.sunset).toEqual('03/01/2016 12:48:24');
         });
 
       $httpBackend.flush();
