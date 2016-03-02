@@ -12,8 +12,8 @@ module.exports = [
 
             if (res.data.cod.toString() === '200') {
               return {
-                currentWeather: res.data.weather[0].main,
-                lastReading: formatDate(new Date()),
+                currentWeather: res.data.weather[0].description,
+                lastReading: formatDate(res.data.dt),
                 temperature: formatTemperature(res.data.main.temp),
                 humidity: formatHumidity(res.data.main.humidity),
                 sunrise: formatDate(res.data.sys.sunrise),
@@ -50,7 +50,7 @@ module.exports = [
       if (Number.isInteger(date)) {
         date *= 1000;
       }
-      var dateFormat = 'h:mm:ss a';
+      var dateFormat = 'MM/dd/yyyy hh:mm:ss';
       return $filter('date')(date, dateFormat);
     }
 
